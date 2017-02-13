@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2DC0B88B-17C3-45CE-8591-EC1064971C9E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WinAmp2.DAL</RootNamespace>
+    <AssemblyName>WinAmp2.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="EntityModel\Album.cs">
+      <DependentUpon>PlayListProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\AlbumSongArtist.cs">
+      <DependentUpon>PlayListProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\Artist.cs">
+      <DependentUpon>PlayListProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\Genre.cs">
+      <DependentUpon>PlayListProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\PlayList.cs">
+      <DependentUpon>PlayListProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\PlayListDetail.cs">
+      <DependentUpon>PlayListProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\PlayListProject.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlayListProject.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\PlayListProject.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlayListProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\PlayListProject.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlayListProject.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\Role.cs">
+      <DependentUpon>PlayListProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\Song.cs">
+      <DependentUpon>PlayListProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\User.cs">
+      <DependentUpon>PlayListProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\UserPlayList.cs">
+      <DependentUpon>PlayListProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Implementation\ArtistRepository.cs" />
+    <Compile Include="Repository\Implementation\GenreRepository.cs" />
+    <Compile Include="Repository\Implementation\SongRepository.cs" />
+    <Compile Include="Repository\Interface\IArtistRepository.cs" />
+    <Compile Include="Repository\Interface\IGenreRepository.cs" />
+    <Compile Include="Repository\Interface\ISongRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WinAmp2.COMMON\WinAmp2.COMMON.csproj">
+      <Project>{8e8901a4-b803-42f5-a8f6-51f4a0e77611}</Project>
+      <Name>WinAmp2.COMMON</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="EntityModel\PlayListProject.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PlayListProject.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EntityModel\PlayListProject.edmx.diagram">
+      <DependentUpon>PlayListProject.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="EntityModel\PlayListProject.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PlayListProject.edmx</DependentUpon>
+      <LastGenOutput>PlayListProject.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModel\PlayListProject.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PlayListProject.edmx</DependentUpon>
+      <LastGenOutput>PlayListProject.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

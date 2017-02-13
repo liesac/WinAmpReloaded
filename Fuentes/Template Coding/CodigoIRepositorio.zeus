@@ -1,0 +1,145 @@
+﻿##|TYPE Template
+##|UNIQUEID 8779af18-6f6a-4f89-90d5-f4ce7c8ab0b6
+##|TITLE Untitled
+##|NAMESPACE 
+##|SOURCE_TYPE Source
+##|OUTPUT_LANGUAGE None
+##|GUI_ENGINE .Net Script
+##|GUI_LANGUAGE C#
+##|GUI_BEGIN
+
+public class GeneratedGui : DotNetScriptGui
+{
+	public GeneratedGui(ZeusContext context) : base(context) {}
+
+	//-----------------------------------------
+	// The User Interface Entry Point
+	//-----------------------------------------
+	public override void Setup()
+	{
+		// ** UNCOMMENT CODE BELOW TO SEE UI **
+
+		//ui.Width  = 100;
+		//ui.Height = 100;
+		//GuiLabel lblDemo = ui.AddLabel("lblDemo", "Demo", "Demo Tooltip");
+		//ui.ShowGui = true;
+	}
+
+}
+##|GUI_END
+##|BODY_MODE Markup
+##|BODY_ENGINE .Net Script
+##|BODY_LANGUAGE C#
+##|BODY_TAG_START <%
+##|BODY_TAG_END %>
+##|BODY_BEGIN
+<%public class GeneratedTemplate : DotNetScriptTemplate
+{
+	public GeneratedTemplate(ZeusContext context) : base(context) {}
+
+	//---------------------------------------------------
+	// Render() is where you want to write your logic    
+	//---------------------------------------------------
+	public override void Render()
+	{
+	    string nameproject = "BTS";
+		string dataBaseName = "LicenseAdministrator";
+		string codNameSpace = "BTS.AgencyAdminAPIDAL.Repository.LicenseAdministrator.Interface";
+		//string codUsingDto = "Common.Dto";
+		string codUsingEntityFramework ="BTS.AgencyAdminAPIDAL.EntityModel";
+		string codManagerEntities="LicenseAdministratorEntities";
+		string author = "Alfa insurance";
+		
+		foreach(ITable t in MyMeta.Databases["agencyadmin_dev"].Tables)
+		{
+		    //string nameTableMeta = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.ToTitleCase(t.Name.ToLower());
+			string nameTableMeta = t.Name;
+			
+		%>// <copyright file="I<%=nameTableMeta %>Repository.cs" company="">
+// </copyright>
+// <author><%=author %>.</author>
+// <summary>This is the INTERFACE from class I<%=nameTableMeta %>Repository.</summary>
+// <date><%= System.DateTime.Now.ToString("dd-MM-yyyy") %>. </date>
+using System.Collections.Generic;
+using System.Linq;
+using <%=nameproject %>.AgencyAdminAPICommon.Dto;
+using <%=nameproject %>.AgencyAdminAPICommon.Dto.<%=dataBaseName %>;
+
+namespace <%=codNameSpace%>
+{
+	 /// <summary>
+    /// Gets or sets the table of the <%=nameTableMeta %>.
+    /// </summary>
+    /// <value>The <%=nameTableMeta %>.</value>
+    /// <author><%=author %>.</author>
+    public interface I<%=nameTableMeta %>Repository
+    {
+        /// <summary>
+        /// Gets list object of the table <%=nameTableMeta %>.
+        /// </summary>
+        /// <param name="list<%=nameTableMeta %>Dto">List that contains the DTOs from <%=nameTableMeta %> table that filter the query.</param>
+        /// <returns>List object of the table <%=nameTableMeta %></returns>
+        /// <author><%=author %>.</author>
+        List<<%=nameTableMeta %>Dto> Get<%=nameTableMeta %>(List<<%=nameTableMeta %>Dto> list<%=nameTableMeta %>Dto);
+
+        /// <summary>
+        /// Gets list object of the table <%=nameTableMeta %>.
+        /// </summary>
+        /// <param name="paginationDto">Attributes to apply the pagination.</param>
+        /// <param name="list<%=nameTableMeta %>Dto">List that contains the DTOs from <%=nameTableMeta %> table that filter the query.</param>
+        /// <returns>List object of the table <%=nameTableMeta %>.</returns>
+        /// <author><%=author %>.</author>
+        List<<%=nameTableMeta %>Dto> Get<%=nameTableMeta %>(PaginationDto paginationDto, List<<%=nameTableMeta %>Dto> list<%=nameTableMeta %>Dto);
+
+        /// <summary>
+        /// Gets list object of the table <%=nameTableMeta %>.
+        /// </summary>
+        /// <param name="dto<%=nameTableMeta %>">that contains the DTO from <%=nameTableMeta %> table that filter the query.</param>
+        /// <returns>List object of the table <%=nameTableMeta %>.</returns>
+        /// <author><%=author %>.</author>
+        List<<%=nameTableMeta %>Dto> Get<%=nameTableMeta %>(<%=nameTableMeta %>Dto dto<%=nameTableMeta %>);
+
+        /// <summary>
+        /// Gets list object of the table <%=nameTableMeta %>.
+        /// </summary>
+        /// <param name="paginationDto">Attributes to apply the pagination.</param>
+        /// <param name="dto<%=nameTableMeta %>">That contains the DTO from <%=nameTableMeta %> table that filter the query.</param>
+        /// <returns>List object of the table <%=nameTableMeta %>.</returns>
+        /// <author><%=author %>.</author>
+        List<<%=nameTableMeta %>Dto> Get<%=nameTableMeta %>(PaginationDto paginationDto, <%=nameTableMeta %>Dto dto<%=nameTableMeta %>);
+
+        /// <summary>
+        /// number of rows affected
+        /// </summary>
+        /// <returns>number of rows affected</returns>
+        ///<author><%=author %>.</author>
+        int Get<%=nameTableMeta %>Count(List<<%=nameTableMeta %>Dto> list<%=nameTableMeta %>Dto);
+
+        /// <summary>
+        /// Save or update records for the table
+        /// </summary>
+        /// <param name="list<%=nameTableMeta %>Dto">List of data to store <%=nameTableMeta %>.</param>
+        /// <returns>The result of processing the list.</returns>
+        /// <author><%=author %>.</author>
+        List<<%=nameTableMeta %>Dto> Save<%=nameTableMeta %>(List<<%=nameTableMeta %>Dto> list<%=nameTableMeta %>Dto);
+		
+		/// <summary>
+        /// Save or update records for the table
+        /// </summary>
+        /// <param name="dto<%=nameTableMeta %>">List of data to store <%=nameTableMeta %>.</param>
+        /// <returns>The result of processing the list.</returns>
+        /// <author><%=author %>.</author>
+		List<<%=nameTableMeta %>Dto> Save<%=nameTableMeta %>(<%=nameTableMeta %>Dto dto<%=nameTableMeta %>);
+		
+		bool Delete<%=nameTableMeta %>(List<<%=nameTableMeta %>Dto> list<%=nameTableMeta %>Dto);
+
+    }
+}
+			<%
+			output.save("E:\\MS\\Proyectos PSL\\AlfaInsurance\\AgencyAdmin\\trunk\\Template Coding\\Generate Code\\IRepo\\I"+nameTableMeta+"Repository.cs","o");
+			output.clear();
+		}
+	}
+}
+%>
+##|BODY_END

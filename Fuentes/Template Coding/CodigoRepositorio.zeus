@@ -1,0 +1,349 @@
+﻿##|TYPE Template
+##|UNIQUEID 771ef178-fc5f-44ae-8e24-fb725065376a
+##|TITLE Untitled
+##|NAMESPACE 
+##|SOURCE_TYPE Source
+##|OUTPUT_LANGUAGE None
+##|GUI_ENGINE .Net Script
+##|GUI_LANGUAGE C#
+##|GUI_BEGIN
+
+public class GeneratedGui : DotNetScriptGui
+{
+	public GeneratedGui(ZeusContext context) : base(context) {}
+
+	//-----------------------------------------
+	// The User Interface Entry Point
+	//-----------------------------------------
+	public override void Setup()
+	{
+		// ** UNCOMMENT CODE BELOW TO SEE UI **
+
+		//ui.Width  = 100;
+		//ui.Height = 100;
+		//GuiLabel lblDemo = ui.AddLabel("lblDemo", "Demo", "Demo Tooltip");
+		//ui.ShowGui = true;
+	}
+
+}
+##|GUI_END
+##|BODY_MODE Markup
+##|BODY_ENGINE .Net Script
+##|BODY_LANGUAGE C#
+##|BODY_TAG_START <%
+##|BODY_TAG_END %>
+##|BODY_BEGIN
+<%public class GeneratedTemplate : DotNetScriptTemplate
+{
+	public GeneratedTemplate(ZeusContext context) : base(context) {}
+
+	//---------------------------------------------------
+	// Render() is where you want to write your logic    
+	//---------------------------------------------------
+	public override void Render()
+	{
+		string nameproject = "BTS";
+		string dataBaseName = "LicenseAdministrator";
+		string codNameSpace = "BTS.AgencyAdminAPIDAL.Repository.LicenseAdministrator.Impl";
+		//string codUsingDto = "Common.Dto";
+		string codUsingEntityFramework ="BTS.AgencyAdminAPIDAL.EntityModel";
+		string codManagerEntities="LicenseAdministratorEntities";
+		string author = "Alfa insurance";
+		
+		foreach(ITable t in MyMeta.Databases["agencyadmin_dev"].Tables)
+		{
+		    //string nameTableMeta = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.ToTitleCase(t.Name.ToLower());
+			string nameTableMeta = t.Name;
+			int countRelation=0;
+			
+		%>// <copyright file="<%=nameTableMeta %>Repository.cs" company="">
+// </copyright>
+// <author><%=author %>.</author>
+// <summary>This is the REPOSITORY from <%=nameTableMeta %>.</summary>
+using AutoMapper;
+using <%=nameproject %>.AgencyAdminAPIDAL.Repository.LicenseAdministrator.Interface;
+using <%=nameproject %>.AgencyAdminAPIDAL.Repository.Extensions;
+using <%=nameproject %>.AgencyAdminAPICommon.Dto;
+using <%=nameproject %>.AgencyAdminAPICommon.Dto.<%=dataBaseName %>;
+using <%=codUsingEntityFramework %>;
+using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Linq.Dynamic;
+using LinqKit;
+
+namespace <%= codNameSpace %>
+{
+	/// <summary>
+	/// Gets or sets the table of the application.
+	/// </summary>
+	/// <value>The <%=nameTableMeta %>.</value>
+	/// <author><%=author %>.</author>
+	public class <%=nameTableMeta %>Repository : I<%=nameTableMeta %>Repository //BaseRepository<MyCoinEntities>, 
+	{
+		/// <summary>
+        /// Gets list object of the table <%=nameTableMeta %>.
+        /// </summary>
+        /// <param name="list<%=nameTableMeta %>Dto">List that contains the DTOs from <%=nameTableMeta %> table that filter the query.</param>
+        /// <returns>List object of the table <%=nameTableMeta %>.</returns>
+        /// <author><%=author %>.</author>
+        public List<<%=nameTableMeta %>Dto> Get<%=nameTableMeta %>(List<<%=nameTableMeta %>Dto> list<%=nameTableMeta %>Dto)
+        {
+            return this.ExecuteGet<%=nameTableMeta %>(null, list<%=nameTableMeta %>Dto);
+        }
+
+        /// <summary>
+        /// Gets list object of the table <%=nameTableMeta %>.
+        /// </summary>
+        /// <param name="paginationDto">Attributes to apply the pagination.</param>
+        /// <param name="list<%=nameTableMeta %>Dto">List that contains the DTOs from <%=nameTableMeta %> table that filter the query.</param>
+        /// <returns>List object of the table <%=nameTableMeta %>.</returns>
+        /// <author><%=author %>.</author>
+        public List<<%=nameTableMeta %>Dto> Get<%=nameTableMeta %>(PaginationDto paginationDto, List<<%=nameTableMeta %>Dto> list<%=nameTableMeta %>Dto)
+        {
+            return this.ExecuteGet<%=nameTableMeta %>(paginationDto, list<%=nameTableMeta %>Dto);
+        }
+		
+		/// <summary>
+        /// Gets list object of the table <%=nameTableMeta %>.
+        /// </summary>
+        /// <param name="dto<%=nameTableMeta %>">List that contains the DTOs from <%=nameTableMeta %> table that filter the query.</param>
+        /// <returns>List object of the table <%=nameTableMeta %>.</returns>
+		/// <author><%=author %>.</author>
+        public List<<%=nameTableMeta %>Dto> Get<%=nameTableMeta %>(<%=nameTableMeta %>Dto dto<%=nameTableMeta %>)
+        {
+			List<<%=nameTableMeta %>Dto> listFilter<%=nameTableMeta %> = new List<<%=nameTableMeta %>Dto>();
+            listFilter<%=nameTableMeta %>.Add(dto<%=nameTableMeta %>);
+            return this.ExecuteGet<%=nameTableMeta %>(null, listFilter<%=nameTableMeta %>);
+        }
+		
+		/// <summary>
+        /// Gets list object of the table <%=nameTableMeta %>.
+        /// </summary>
+        /// <param name="paginationDto">Attributes to apply the pagination.</param>
+        /// <param name="listFilter<%=nameTableMeta %>">List that contains the DTOs from <%=nameTableMeta %> table that filter the query.</param>
+        /// <returns>List object of the table <%=nameTableMeta %>.</returns>
+		/// <author><%=author %>.</author>
+        public List<<%=nameTableMeta %>Dto> Get<%=nameTableMeta %>(PaginationDto paginationDto, <%=nameTableMeta %>Dto dto<%=nameTableMeta %>)
+        {
+			List<<%=nameTableMeta %>Dto> listFilter<%=nameTableMeta %> = new List<<%=nameTableMeta %>Dto>();
+            listFilter<%=nameTableMeta %>.Add(dto<%=nameTableMeta %>);
+            return this.ExecuteGet<%=nameTableMeta %>(paginationDto, listFilter<%=nameTableMeta %>);
+        }
+		
+		/// <summary>
+        /// Number of rows affected.
+        /// </summary>
+        /// <param name="list<%=nameTableMeta %>Dto">List that contains the DTOs from <%=nameTableMeta %> table that filter the query.</param>
+        /// <returns>Number of rows affected.</returns>
+		/// <author><%=author %>.</author>
+        public int Get<%=nameTableMeta %>Count(List<<%=nameTableMeta %>Dto> list<%=nameTableMeta %>Dto)
+        {
+            using (<%=codManagerEntities%> context = new <%=codManagerEntities%>())
+            {
+				var predicate = ConditionalQuery.GeneratePredicateQuery<<%=nameTableMeta %>, <%=nameTableMeta %>Dto>(list<%=nameTableMeta %>Dto);
+
+                return context.<%=nameTableMeta %>.AsExpandable()
+                .Where(predicate).AsParallel()
+                .Count();
+            }
+        }
+		
+		/// <summary>
+        /// Save or update records for the table
+        /// </summary>
+        /// <param name="dto<%=nameTableMeta %>">List of data to store <%=nameTableMeta %>.</param>
+        /// <returns>The result of processing the list.</returns>
+		/// <author>Mauricio Suárez.</author>
+        public List<<%=nameTableMeta %>Dto> Save<%=nameTableMeta %>(<%=nameTableMeta %>Dto dto<%=nameTableMeta %>)
+        {
+			List<<%=nameTableMeta %>Dto> listData<%=nameTableMeta %> = new List<<%=nameTableMeta %>Dto>();
+            listData<%=nameTableMeta %>.Add(dto<%=nameTableMeta %>);
+			return this.Save<%=nameTableMeta %>(listData<%=nameTableMeta %>);
+		}
+		
+		/// <summary>
+        /// Save or update records for the table
+        /// </summary>
+        /// <param name="list<%=nameTableMeta %>Dto">List of data to store <%=nameTableMeta %>.</param>
+        /// <returns>The result of processing the list.</returns>
+		/// <author>Mauricio Suárez.</author>
+		public List<<%=nameTableMeta %>Dto> Save<%=nameTableMeta %>(List<<%=nameTableMeta %>Dto> list<%=nameTableMeta %>Dto)
+        {
+            List<<%=nameTableMeta %>> list<%=nameTableMeta %>Result = new List<<%=nameTableMeta %>>();
+            using (<%=codManagerEntities%> context = new <%=codManagerEntities%>())
+            {
+                ObjectContext objectContext = ((IObjectContextAdapter)context).ObjectContext;
+                ObjectSet<<%=nameTableMeta %>> set = objectContext.CreateObjectSet<<%=nameTableMeta %>>();
+                string[] entity<%=nameTableMeta %>Keys = set.EntitySet.ElementType.KeyMembers.Select(k => k.Name).ToArray();
+
+                bool[] resultValidateInsertOrUpdate = ConditionalQuery.ValidatePrimaryKeyValueInDto(list<%=nameTableMeta %>Dto, entity<%=nameTableMeta %>Keys);
+
+                int resultValidateInsertOrUpdateCount = resultValidateInsertOrUpdate.Count();
+
+                int i = 0;
+                foreach (<%=nameTableMeta %>Dto dto<%=nameTableMeta %> in list<%=nameTableMeta %>Dto)
+                {
+                    <%=nameTableMeta %> entity<%=nameTableMeta %> = Mapper.Map<<%=nameTableMeta %>Dto, <%=nameTableMeta %>>(dto<%=nameTableMeta %>);
+
+                    if (resultValidateInsertOrUpdateCount > 0)
+                    {
+
+                        if (resultValidateInsertOrUpdate[i])
+                        {
+                            context.<%=nameTableMeta %>.Attach(entity<%=nameTableMeta %>);
+							context.Entry(entity<%=nameTableMeta %>).State = System.Data.Entity.EntityState.Modified;
+                        }
+                        else
+                        {
+                            context.<%=nameTableMeta %>.Add(entity<%=nameTableMeta %>);
+                        }
+                    }
+                    else
+                    {
+                        context.<%=nameTableMeta %>.Add(entity<%=nameTableMeta %>);
+                    }
+
+                    list<%=nameTableMeta %>Result.Add(entity<%=nameTableMeta %>);
+					i++;
+                }
+
+                context.SaveChanges();
+            }
+
+            list<%=nameTableMeta %>Dto = null;
+            return list<%=nameTableMeta %>Result.Select(Mapper.Map<<%=nameTableMeta %>, <%=nameTableMeta %>Dto>).ToList();
+        }
+		
+		/// <summary>
+        /// Gets list object of the table <%=nameTableMeta %>.
+        /// </summary>
+        /// <param name="llist<%=nameTableMeta %>Dto">List that contains the DTOs from <%=nameTableMeta %> table that filter the query.</param>
+        /// <returns>List object of the table <%=nameTableMeta %>.</returns>
+		/// <author><%=author %>.</author>
+        private List<<%=nameTableMeta %>Dto> ExecuteUnPaginated(List<<%=nameTableMeta %>Dto> list<%=nameTableMeta %>Dto)
+        {
+            using (<%=codManagerEntities%> context = new <%=codManagerEntities%>())
+            {
+				var predicate = ConditionalQuery.GeneratePredicateQuery<<%=nameTableMeta %>, <%=nameTableMeta %>Dto>(list<%=nameTableMeta %>Dto);
+
+                return context.<%=nameTableMeta %>
+                .Include(ConditionalQuery.GenerateIncludes(list<%=nameTableMeta %>Dto)).AsExpandable()
+                .Where(predicate).AsParallel()
+                .Select(Mapper.Map<<%=nameTableMeta %>, <%=nameTableMeta %>Dto>).ToList();
+            }
+        }
+		
+		/// <summary>
+        /// Gets list object of the table <%=nameTableMeta %>.
+        /// </summary>
+        /// <param name="paginationDto">Attributes to apply the pagination.</param>
+        /// <param name="list<%=nameTableMeta %>Dto">List that contains the DTOs from <%=nameTableMeta %> table that filter the query.</param>
+        /// <returns>List object of the table <%=nameTableMeta %>.</returns>
+		/// <author><%=author %>.</author>
+        private List<<%=nameTableMeta %>Dto> ExecutePaginated(PaginationDto paginationDto, List<<%=nameTableMeta %>Dto> list<%=nameTableMeta %>Dto)
+        {
+            using (<%=codManagerEntities%> context = new <%=codManagerEntities%>())
+            {
+                
+                if (string.IsNullOrEmpty(paginationDto.SortExpression))
+                {
+                    paginationDto.SortExpression = "<%
+				try
+				{
+				%><%=t.PrimaryKeys[0].Name%>";<%
+				}
+				catch (System.Exception ex)
+			    {
+			      foreach(IColumn c in t.Columns)
+				  {
+					//string columnName= System.Globalization.CultureInfo.CurrentUICulture.TextInfo.ToTitleCase(c.Name.ToLower());
+					string columnName=c.Name;
+					%><%=columnName%>";<%
+					break;
+				  }
+			    }
+				%>
+                    paginationDto.SortDirection = "ASC";
+                }
+				
+				if (paginationDto.PageSize == 0 && paginationDto.CurrentPage == 0)
+                {
+                    paginationDto.PageSize = int.MaxValue;
+                }
+				
+				var predicate = ConditionalQuery.GeneratePredicateQuery<<%=nameTableMeta %>, <%=nameTableMeta %>Dto>(list<%=nameTableMeta %>Dto);
+
+                return context.<%=nameTableMeta %>.AsExpandable()
+				.Include(ConditionalQuery.GenerateIncludes(list<%=nameTableMeta %>Dto))
+                .Where(predicate).AsParallel()
+                .OrderBy(paginationDto.SortExpression + " " + paginationDto.SortDirection)
+                .Skip(paginationDto.CurrentPage * paginationDto.PageSize)
+                .Take(paginationDto.PageSize)
+                .Select(Mapper.Map<<%=nameTableMeta %>, <%=nameTableMeta %>Dto>).ToList();
+            }
+        }
+		
+		/// <summary>
+        /// Gets list object of the table <%=nameTableMeta %>.
+        /// </summary>
+        /// <param name="paginationDto">Attributes to apply the pagination.</param>
+        /// <param name="list<%=nameTableMeta %>Dto">List that contains the DTOs from <%=nameTableMeta %> table that filter the query.</param>
+        /// <returns>List object of the table <%=nameTableMeta %>.</returns>
+		/// <author><%=author %>.</author>
+        private List<<%=nameTableMeta %>Dto> ExecuteGet<%=nameTableMeta %>(PaginationDto paginationDto, List<<%=nameTableMeta %>Dto> list<%=nameTableMeta %>Dto)
+        {   
+            if (paginationDto != null)
+            {
+                return ExecutePaginated(paginationDto, list<%=nameTableMeta %>Dto);
+            }
+            else
+            {
+                return ExecuteUnPaginated(list<%=nameTableMeta %>Dto);
+            }
+        }
+		
+		/// <summary>
+        /// Delete rows from table <%=nameTableMeta %>.
+        /// </summary>
+        /// <param name="list<%=nameTableMeta %>Dto">List that contains the DTOs from <%=nameTableMeta %> table that filter the query.</param>
+        /// <returns>Comfirm execute command.</returns>
+		/// <author><%=author %>.</author>
+		public bool Delete<%=nameTableMeta %>(List<<%=nameTableMeta %>Dto> list<%=nameTableMeta %>Dto)
+        {
+            using (<%=codManagerEntities%> context = new <%=codManagerEntities%>())
+            {
+                var predicate = ConditionalQuery.GeneratePredicateQuery<<%=nameTableMeta %>, <%=nameTableMeta %>Dto>(list<%=nameTableMeta %>Dto);
+
+                context.<%=nameTableMeta %>.RemoveRange(context.<%=nameTableMeta %>.AsExpandable().Where(predicate));
+                context.SaveChanges();
+
+                return true;
+            }
+        }
+	}
+}<%
+			output.save("E:\\MS\\Proyectos PSL\\AlfaInsurance\\AgencyAdmin\\trunk\\Template Coding\\Generate Code\\Repo\\"+nameTableMeta+"Repository.cs","o");
+			output.clear();
+		}
+	}
+	
+	private string[] nameKeys;
+	
+	private int ValidatePropertyCountKey(string propertyNameTable)
+    {
+		int countResult = 0;
+        foreach (string entityKeyName in this.nameKeys)
+        {
+           if(propertyNameTable == entityKeyName)
+		   {
+				countResult++;
+		   }
+        }
+		
+		return countResult;
+    }
+}
+%>
+##|BODY_END

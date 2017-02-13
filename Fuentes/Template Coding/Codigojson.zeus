@@ -1,0 +1,130 @@
+﻿##|TYPE Template
+##|UNIQUEID b5fb495f-f7f5-4be7-a77a-e91c4c46f4ef
+##|TITLE Untitled
+##|NAMESPACE 
+##|SOURCE_TYPE Source
+##|OUTPUT_LANGUAGE None
+##|GUI_ENGINE .Net Script
+##|GUI_LANGUAGE C#
+##|GUI_BEGIN
+
+public class GeneratedGui : DotNetScriptGui
+{
+	public GeneratedGui(ZeusContext context) : base(context) {}
+
+	//-----------------------------------------
+	// The User Interface Entry Point
+	//-----------------------------------------
+	public override void Setup()
+	{
+		// ** UNCOMMENT CODE BELOW TO SEE UI **
+
+		//ui.Width  = 100;
+		//ui.Height = 100;
+		//GuiLabel lblDemo = ui.AddLabel("lblDemo", "Demo", "Demo Tooltip");
+		//ui.ShowGui = true;
+	}
+
+}
+##|GUI_END
+##|BODY_MODE Markup
+##|BODY_ENGINE .Net Script
+##|BODY_LANGUAGE C#
+##|BODY_TAG_START <%
+##|BODY_TAG_END %>
+##|BODY_BEGIN
+<%public class GeneratedTemplate : DotNetScriptTemplate
+{
+	public GeneratedTemplate(ZeusContext context) : base(context) {}
+
+	//---------------------------------------------------
+	// Render() is where you want to write your logic    
+	//---------------------------------------------------
+	public override void Render()
+	{
+		string codNameSpace = "BTS.AgencyAdminAPICommon.Dto.LicenseAdministrator";
+		string dataBaseName = "agencyadmin_dev";
+		string nameproject = "MyCoin";
+		string author = "Alfa Insurance";
+		bool applyPropertysBaseDto = false;
+		this.propertysBaseDto = new string[1];
+		propertysBaseDto[0]="Id";
+		
+		foreach(ITable t in MyMeta.Databases[dataBaseName].Tables)
+		{
+			//string nameTableMeta=System.Globalization.CultureInfo.CurrentUICulture.TextInfo.ToTitleCase(t.Name.ToLower());
+			string nameTableMeta = t.Name;
+			%>// <copyright file="<%=nameTableMeta %>json.json" company="">
+// <%=author %>. All rights reserved.
+// </copyright>
+// <author><%=author %>.</author>
+// <summary>This is the json from <%=nameTableMeta %></summary>
+{
+	<%
+			foreach(IColumn c in t.Columns)
+			{
+				//string nameColumnTableMeta = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.ToTitleCase(c.Name.ToLower());
+				string nameColumnTableMeta = c.Name;
+				
+			%>
+		"<%=nameColumnTableMeta[0].ToString().ToLower() + nameColumnTableMeta.ToString().Remove(0,1) %>" : <%= (c.LanguageType.ToString().ToLower()=="string"?"\"null\"":"null") %>,<%				
+			}
+			
+			nameKeys = new string[t.ForeignKeys.Count];
+
+			int countRelation=0;
+			for (int j = 0; j < t.ForeignKeys.Count; j++) 
+				{ 
+					Dnp.Utils.TableRelation tr = new Dnp.Utils.TableRelation(t, t.ForeignKeys[j]);
+					
+					countRelation = this.ValidatePropertyCountKey(tr.ForeignTable.Name);
+					nameKeys[j] = tr.ForeignTable.Name;
+					
+					if(tr.IsZeroToMany)
+					{%>
+		"<%=tr.ForeignTable.Name[0].ToString().ToLower() + tr.ForeignTable.Name.Remove(0,1) %>" : [],<%              }
+					if(tr.IsManyToOne)
+					{%>
+		"<%=tr.ForeignTable.Name[0].ToString().ToLower() + tr.ForeignTable.Name.Remove(0,1)%>" : {},<%              }
+                 }
+		%>}<%
+			output.save("E:\\MS\\Proyectos PSL\\AlfaInsurance\\AgencyAdmin\\trunk\\Template Coding\\Generate Code\\json\\"+nameTableMeta+"json.json","o");
+			output.clear();
+		}
+	}
+	
+	
+	private string[] nameKeys;
+	
+	private string[] propertysBaseDto;
+	
+	private int ValidatePropertyCountKey(string propertyNameTable)
+    {
+		int countResult = 0;
+        foreach (string entityKeyName in this.nameKeys)
+        {
+           if(propertyNameTable == entityKeyName)
+		   {
+				countResult++;
+		   }
+        }
+		
+		return countResult;
+    }
+	
+	private bool ValidatePropertyExistInBaseDto(string propertyNameTable)
+	{
+		bool result = false;
+		foreach (string propertyBaseDto in this.propertysBaseDto)
+        {
+           if(propertyNameTable == propertyBaseDto)
+		   {
+				result=true;
+				break;
+		   }
+        }
+		return result;
+	}
+}
+%>
+##|BODY_END
